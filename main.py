@@ -27,6 +27,8 @@ if pagina == 'HOME':
     minimo = st.number_input('minimo', min_value=1)
     massimo = st.number_input('massimo', min_value=2)
     volte = st.number_input('volte', min_value=1)
+
+    st.write('''\nSeleziona il tipo di grafico che vuoi visualizzare\n''')
     frequenze_assolute = st.checkbox('Grafico frequenze assolute')
     frequenze_percentuali = st.checkbox('Grafico frequenze relative percentuali')
 
@@ -68,42 +70,77 @@ if pagina == 'HOME':
         time.sleep(5)
         browser.quit()
         
+        if frequenze_assolute: 
+            # realizzo il grafico frequenze
+            x = np.arange(minimo,massimo +1) # per distanziare colonne
+            width = 0.8 #larghezza delle colonne
 
-        # realizzo il grafico frequenze
-        x = np.arange(minimo,massimo +1) # per distanziare colonne
-        width = 0.8 #larghezza delle colonne
+            frequenze = [] #array delle frequenze
+            for i in range(minimo,massimo+1):
+                frequenze.append(numeri.count(i))
 
-        frequenze = [] #array delle frequenze
-        for i in range(minimo,massimo+1):
-            frequenze.append(numeri.count(i))
-
-        #stile del grafico
-        mpl.style.use('seaborn')
-        fig, ax = plt.subplots()
-        rects = ax.bar(x, frequenze , width, label='frequenze')
+            #stile del grafico
+            mpl.style.use('seaborn')
+            fig, ax = plt.subplots()
+            rects = ax.bar(x, frequenze , width, label='frequenze')
 
 
-        ax.set_title('\nRandom generator: quanto è random?\n',c = 'maroon', size = 20.0)
-        ax.set_ylabel('Frequenze assolute')
-        ax.set_xlabel('\nNumeri estratti')
-        ax.set_xticks(x)
+            ax.set_title('\nRandom generator: quanto è random?\n',c = 'maroon', size = 20.0)
+            ax.set_ylabel('Frequenze assolute')
+            ax.set_xlabel('\nNumeri estratti')
+            ax.set_xticks(x)
 
-        for rect in rects:
-                height = rect.get_height()
-                ax.annotate('{}'.format(height),
-                            xy=(rect.get_x() + rect.get_width()/2, height),
-                            xytext=(0, 3),  # 3 points vertical offset
-                            textcoords="offset points",
-                            ha='center', va='bottom')
+            for rect in rects:
+                    height = rect.get_height()
+                    ax.annotate('{}'.format(height),
+                                xy=(rect.get_x() + rect.get_width()/2, height),
+                                xytext=(0, 3),  # 3 points vertical offset
+                                textcoords="offset points",
+                                ha='center', va='bottom')
 
-        st.write('''
-            ### Risultati dell'estrazione:\n
-            Il grafico mostra per ciascun numero il numero di volte che è stato estratto \n        
-        ''')
+            st.write('''### Risultati dell'estrazione:\n''')
 
-        st.set_option('deprecation.showPyplotGlobalUse', False)
-        st.pyplot()
-        start = False
+            st.set_option('deprecation.showPyplotGlobalUse', False)
+            st.pyplot()
+            start = False
+
+        if frequenze_percentuali:
+            # realizzo il grafico percentuali
+            x = np.arange(minimo,massimo +1) # per distanziare colonne
+            width = 0.8 #larghezza delle colonne
+
+            percentuali = [] #array delle frequenze relative percentuali approssimate a 1 decimale
+            tot = len(numeri)
+            for i in range(minimo,massimo+1):
+                percentuali.append(round(numeri.count(i)/tot*100,1))
+
+            #stile del grafico
+            mpl.style.use('seaborn')
+            fig, ax = plt.subplots()
+            rects = ax.bar(x, percentuali , width, label='frequenze')
+
+
+            ax.set_title('\nRandom generator: quanto è random?\n',c = 'maroon', size = 20.0)
+            ax.set_ylabel('Frequenze relativa percentuale')
+            ax.set_xlabel('\nNumeri estratti')
+            ax.set_xticks(x)
+
+            for rect in rects:
+                    height = rect.get_height()
+                    ax.annotate('{}'.format(height),
+                                xy=(rect.get_x() + rect.get_width()/2, height),
+                                xytext=(0, 3),  # 3 points vertical offset
+                                textcoords="offset points",
+                                ha='center', va='bottom')
+
+            plt.show()
+
+            st.write('''### Risultati dell'estrazione:\n''')
+
+            st.set_option('deprecation.showPyplotGlobalUse', False)
+            st.pyplot()
+            start = False
+
 
 
 elif pagina == 'RANDOM GENERATOR':
