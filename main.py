@@ -43,10 +43,9 @@ if pagina == 'HOME':
 
     if start:
         if browser_type == 'CHROME':
-            browser = webdriver.Chrome(
-                'C:\\Users\\tomma\\OneDrive\\TOMMY\\Documenti\\Tommaso\\4G-SA\\MATEMATICA\\numeri_casuali\\chromedriver.exe')
+            browser = webdriver.Chrome()
         elif browser_type == 'FIREFOX':
-            browser = webdriver.Firefox('geckodriver.log')
+            browser = webdriver.Firefox()
 
         browser.get(
             'https://www.google.com/search?channel=fs&client=ubuntu&q=numeri+casuali')
@@ -168,10 +167,9 @@ elif pagina == 'RANDOM GENERATOR':
     button = st.button('RANDOM GENERATOR')
     if button:
         if browser_type == 'CHROME':
-            browser = webdriver.Chrome(
-                'C:\\Users\\tomma\\OneDrive\\TOMMY\\Documenti\\Tommaso\\4G-SA\\MATEMATICA\\numeri_casuali\\chromedriver.exe')
+            browser = webdriver.Chrome()
         elif browser_type == 'FIREFOX':
-            browser = webdriver.Firefox('geckodriver.log')
+            browser = webdriver.Firefox()
 
         browser.get(
             'https://www.google.com/search?channel=fs&client=ubuntu&q=numeri+casuali')
