@@ -167,7 +167,7 @@ elif pagina == 'RANDOM GENERATOR':
     button = st.button('RANDOM GENERATOR')
     if button:
         if browser_type == 'CHROME':
-            browser = webdriver.Chrome()
+            browser = webdriver.Chrome('chromedriver.exe')
         elif browser_type == 'FIREFOX':
             browser = webdriver.Firefox()
 
