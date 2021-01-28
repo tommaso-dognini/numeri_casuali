@@ -6,7 +6,8 @@ import matplotlib as mpl
 import numpy as np
 
 st.title('Random Generator: Quanto è random?')
-pagina = st.sidebar.radio('Menù', ['HOME', 'RANDOM GENERATOR', 'CODICE SORGENTE'])
+pagina = st.sidebar.radio(
+    'Menù', ['HOME', 'RANDOM GENERATOR', 'CODICE SORGENTE'])
 
 
 if pagina == 'HOME':
@@ -30,7 +31,8 @@ if pagina == 'HOME':
 
     st.write('''\nSeleziona il tipo di grafico che vuoi visualizzare\n''')
     frequenze_assolute = st.checkbox('Grafico frequenze assolute')
-    frequenze_percentuali = st.checkbox('Grafico frequenze relative percentuali')
+    frequenze_percentuali = st.checkbox(
+        'Grafico frequenze relative percentuali')
 
     st.write('''
         **Per proseguire clicca sul tasto start:**\n
@@ -40,7 +42,7 @@ if pagina == 'HOME':
     ''')
     start = False
     start = st.button('START')
-    
+
     if start:
         browser = webdriver.Chrome()
         browser.get(
@@ -66,39 +68,39 @@ if pagina == 'HOME':
             time.sleep(0.5)
             numeri.append(int(ris.text))
 
-        #chiudo il browser
+        # chiudo il browser
         time.sleep(5)
         browser.quit()
-        
-        if frequenze_assolute: 
-            # realizzo il grafico frequenze
-            x = np.arange(minimo,massimo +1) # per distanziare colonne
-            width = 0.8 #larghezza delle colonne
 
-            frequenze = [] #array delle frequenze
-            for i in range(minimo,massimo+1):
+        if frequenze_assolute:
+            # realizzo il grafico frequenze
+            x = np.arange(minimo, massimo + 1)  # per distanziare colonne
+            width = 0.8  # larghezza delle colonne
+
+            frequenze = []  # array delle frequenze
+            for i in range(minimo, massimo+1):
                 frequenze.append(numeri.count(i))
 
-            #stile del grafico
+            # stile del grafico
             mpl.style.use('seaborn')
             fig, ax = plt.subplots()
-            rects = ax.bar(x, frequenze , width, label='frequenze')
+            rects = ax.bar(x, frequenze, width, label='frequenze')
 
-
-            ax.set_title('\nRandom generator: quanto è random?\n',c = 'maroon', size = 20.0)
+            ax.set_title('\nRandom generator: quanto è random?\n',
+                         c='maroon', size=20.0)
             ax.set_ylabel('Frequenze assolute')
             ax.set_xlabel('\nNumeri estratti')
             ax.set_xticks(x)
 
             for rect in rects:
-                    height = rect.get_height()
-                    ax.annotate('{}'.format(height),
-                                xy=(rect.get_x() + rect.get_width()/2, height),
-                                xytext=(0, 3),  # 3 points vertical offset
-                                textcoords="offset points",
-                                ha='center', va='bottom')
+                height = rect.get_height()
+                ax.annotate('{}'.format(height),
+                            xy=(rect.get_x() + rect.get_width()/2, height),
+                            xytext=(0, 3),  # 3 points vertical offset
+                            textcoords="offset points",
+                            ha='center', va='bottom')
 
-            st.write('''### Risultati dell'estrazione:\n''')
+            st.write('''### Risultati dell'estrazione:FREQUENZE ASSOLUTE\n''')
 
             st.set_option('deprecation.showPyplotGlobalUse', False)
             st.pyplot()
@@ -106,41 +108,41 @@ if pagina == 'HOME':
 
         if frequenze_percentuali:
             # realizzo il grafico percentuali
-            x = np.arange(minimo,massimo +1) # per distanziare colonne
-            width = 0.8 #larghezza delle colonne
+            x = np.arange(minimo, massimo + 1)  # per distanziare colonne
+            width = 0.8  # larghezza delle colonne
 
-            percentuali = [] #array delle frequenze relative percentuali approssimate a 1 decimale
+            percentuali = []  # array delle frequenze relative percentuali approssimate a 1 decimale
             tot = len(numeri)
-            for i in range(minimo,massimo+1):
-                percentuali.append(round(numeri.count(i)/tot*100,1))
+            for i in range(minimo, massimo+1):
+                percentuali.append(round(numeri.count(i)/tot*100, 1))
 
-            #stile del grafico
+            # stile del grafico
             mpl.style.use('seaborn')
             fig, ax = plt.subplots()
-            rects = ax.bar(x, percentuali , width, label='frequenze')
+            rects = ax.bar(x, percentuali, width, label='frequenze')
 
-
-            ax.set_title('\nRandom generator: quanto è random?\n',c = 'maroon', size = 20.0)
+            ax.set_title('\nRandom generator: quanto è random?\n',
+                         c='maroon', size=20.0)
             ax.set_ylabel('Frequenze relativa percentuale')
             ax.set_xlabel('\nNumeri estratti')
             ax.set_xticks(x)
 
             for rect in rects:
-                    height = rect.get_height()
-                    ax.annotate('{}'.format(height),
-                                xy=(rect.get_x() + rect.get_width()/2, height),
-                                xytext=(0, 3),  # 3 points vertical offset
-                                textcoords="offset points",
-                                ha='center', va='bottom')
+                height = rect.get_height()
+                ax.annotate('{}'.format(height),
+                            xy=(rect.get_x() + rect.get_width()/2, height),
+                            xytext=(0, 3),  # 3 points vertical offset
+                            textcoords="offset points",
+                            ha='center', va='bottom')
 
             plt.show()
 
-            st.write('''### Risultati dell'estrazione:\n''')
+            st.write(
+                '''### Risultati dell'estrazione: FREQUENZE RELATIVE PERCENTUALI\n''')
 
             st.set_option('deprecation.showPyplotGlobalUse', False)
             st.pyplot()
             start = False
-
 
 
 elif pagina == 'RANDOM GENERATOR':
