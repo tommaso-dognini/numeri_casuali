@@ -43,7 +43,8 @@ if pagina == 'HOME':
 
     if start:
         if browser_type == 'CHROME':
-            browser = webdriver.Chrome('chromedriver.exe')
+            browser = webdriver.Chrome(
+                'C:\\Users\\tomma\\OneDrive\\TOMMY\\Documenti\\Tommaso\\4G-SA\\MATEMATICA\\numeri_casuali\\chromedriver.exe')
         elif browser_type == 'FIREFOX':
             browser = webdriver.Firefox('geckodriver.log')
 
@@ -167,7 +168,8 @@ elif pagina == 'RANDOM GENERATOR':
     button = st.button('RANDOM GENERATOR')
     if button:
         if browser_type == 'CHROME':
-            browser = webdriver.Chrome('chromedriver.exe')
+            browser = webdriver.Chrome(
+                'C:\\Users\\tomma\\OneDrive\\TOMMY\\Documenti\\Tommaso\\4G-SA\\MATEMATICA\\numeri_casuali\\chromedriver.exe')
         elif browser_type == 'FIREFOX':
             browser = webdriver.Firefox('geckodriver.log')
 
