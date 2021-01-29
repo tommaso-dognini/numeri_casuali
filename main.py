@@ -69,9 +69,9 @@ if start:
             time.sleep(0.5)
             numeri.append(int(ris.text))
 
-            # chiudo il browser
-            time.sleep(5)
-            browser.quit()
+        # chiudo il browser
+        time.sleep(5)
+        browser.quit()
 
         if frequenze_assolute:
             # realizzo il grafico frequenze
