@@ -42,7 +42,7 @@ if pagina == 'HOME':
     start = st.button('START')
     
     if start:
-        browser = webdriver.Chrome()
+        browser = webdriver.Firefox()
         browser.get(
             'https://www.google.com/search?channel=fs&client=ubuntu&q=numeri+casuali')
         time.sleep(10)
